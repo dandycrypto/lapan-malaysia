@@ -13,3 +13,7 @@ dist/
 __pycache__/
 
 .venv/
+
+# Local test-instance visitor statistics.
+/data/analytics.db
+/data/analytics.db-*
