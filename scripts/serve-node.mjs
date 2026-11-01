@@ -78,7 +78,8 @@ const readBody=req=>new Promise((resolve,reject)=>{
 
 const server=createServer(async(req,res)=>{
   try{
-    const proto=req.headers['x-forwarded-proto']==='http'?'http':'https';
+    const forwardedProto=req.headers['x-forwarded-proto'];
+    const proto=typeof forwardedProto==='string'?forwardedProto.split(',')[0].trim():(req.socket.encrypted?'https':'http');
     const host=req.headers['x-forwarded-host']||req.headers.host||`127.0.0.1:${port}`;
     const headers=new Headers();
     for(const [name,value] of Object.entries(req.headers)){
