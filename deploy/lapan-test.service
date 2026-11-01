@@ -1,0 +1,20 @@
+[Unit]
+Description=Lapan Malaysia navigation test instance (lapan-test.dysolvit.com)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/.hermes/persistent/lapan-malaysia
+EnvironmentFile=/home/ubuntu/.hermes/persistent/lapan-malaysia/.env
+Environment=NODE_NO_WARNINGS=1
+ExecStart=/home/ubuntu/.hermes/node/bin/node scripts/serve-node.mjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+MemoryMax=768M
+
+[Install]
+WantedBy=multi-user.target
