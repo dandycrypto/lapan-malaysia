@@ -1,3 +1,3 @@
-# Screenshots for the Lapan pull requests
+# Screenshots and PR helpers for the Lapan pull requests
 
-Images only. Referenced from PR descriptions; not part of any code change.
+Start here: [OPEN-PRS.md](OPEN-PRS.md) has one tap links that open each pull request with its description filled in.
