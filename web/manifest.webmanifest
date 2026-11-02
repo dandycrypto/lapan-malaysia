@@ -7,8 +7,11 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#121b29",
-  "theme_color": "#121b29",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "categories": ["navigation", "travel"],
+  "background_color": "#f7f8f3",
+  "theme_color": "#114b3e",
   "icons": [
     {
       "src": "/lapan-192.png",
@@ -21,6 +24,38 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/lapan-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/lapan-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Plan a route",
+      "short_name": "Plan",
+      "url": "/?action=plan",
+      "icons": [{ "src": "/lapan-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Near me",
+      "short_name": "Near me",
+      "url": "/?action=locate",
+      "icons": [{ "src": "/lapan-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Toll calculator",
+      "short_name": "Toll",
+      "url": "/?action=toll",
+      "icons": [{ "src": "/lapan-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

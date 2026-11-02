@@ -107,3 +107,9 @@ async route(item,origin){const resume=document.body.classList.contains('guiding'
 window.addEventListener('lapan-voice-enabled',()=>{spoken=-1});
 
 window.LapanSignals?.attachLeaflet(map);
+
+// A shortcut on the home screen opens the app straight into the job it names.
+{const action=new URLSearchParams(location.search).get('action');
+ if(action==='plan')$('destination')?.focus();
+ else if(action==='locate')$('locate')?.click();
+ else if(action==='toll')$('addtoll')?.click();}

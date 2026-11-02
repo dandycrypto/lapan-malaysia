@@ -1,6 +1,7 @@
 # Unreleased changes
 
 Pending routine changes (not yet curated into a public release):
+- Installed-app polish: maskable launcher icons, portrait lock, three long-press shortcuts (Plan, Near me, Toll), an edge-to-edge iOS status bar, no rubber-band scroll or text selection, and updates that wait for you instead of reloading mid-route.
 
 - Security headers on every response: Content-Security-Policy, HSTS, frame denial, referrer and permissions policies.
 - Subresource Integrity on the Leaflet files loaded from unpkg; fonts now load through preconnected link tags instead of a CSS import.
