@@ -177,3 +177,9 @@ body.guiding .lang-switch{display:none}
 body.guiding:not(.drive-more) #navLang{display:none!important}
 #driveControls #navLang{order:-2}
 
+/* The vehicle shape that sits at your position on both maps. */
+.vehicle-marker{background:none;border:0}
+.vehicle-shape{display:block;width:40px;height:40px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));transform:rotate(var(--heading,0deg));transition:transform .2s ease}
+.vehicle-shape svg{display:block;width:40px;height:40px}
+.more-row.vehicle-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.more-row.vehicle-row select{min-height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:0 12px}
