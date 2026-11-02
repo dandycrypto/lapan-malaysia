@@ -177,3 +177,6 @@ body.guiding .lang-switch{display:none}
 body.guiding:not(.drive-more) #navLang{display:none!important}
 #driveControls #navLang{order:-2}
 
+/* Live follow: the button stays lit while the map is tracking you. */
+#locate.following{background:#114b3e;color:#fff}
+#locate.following::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid rgba(17,75,62,.45)}

@@ -364,5 +364,8 @@ window.LapanI18n.add({
 "Traffic light location · live colour unavailable":"Lokasi lampu isyarat · warna masa nyata tidak tersedia",
 "Mapped traffic light; live colour unavailable":"Lampu isyarat dipetakan; warna masa nyata tidak tersedia",
 "Voice unavailable or interrupted · tap to retry, or choose a voice in Voice & sound":"Suara tidak tersedia atau terganggu · ketik untuk cuba lagi, atau pilih suara dalam Suara & bunyi",
-"Hello":"Helo"
+"Hello":"Helo",
+ "Following your location as you move.":"Mengikuti lokasi anda semasa anda bergerak.",
+ "Location permission was denied. Allow it in your browser settings.":"Kebenaran lokasi ditolak. Benarkannya dalam tetapan pelayar anda.",
+ "Waiting for a GPS fix. Move to an open area.":"Menunggu isyarat GPS. Bergerak ke kawasan terbuka.",
 });

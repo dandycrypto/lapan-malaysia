@@ -1,6 +1,7 @@
 # Unreleased changes
 
 Pending routine changes (not yet curated into a public release):
+- Live location without a route: tap the location button and the map zooms in and follows you as you move, with an accuracy ring. It stops when you tap again, when a route starts guiding, or while the screen is hidden, and it never chases GPS jitter under 6 m.
 
 - Security headers on every response: Content-Security-Policy, HSTS, frame denial, referrer and permissions policies.
 - Subresource Integrity on the Leaflet files loaded from unpkg; fonts now load through preconnected link tags instead of a CSS import.
