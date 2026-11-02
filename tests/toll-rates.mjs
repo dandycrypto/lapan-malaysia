@@ -68,6 +68,12 @@ const plus=hw('1'),pts=through(['SUNGAI BESI','SKUDAI'],plus);const jb={legs:[{p
 r=mergeRateTolls(none,jb,real);assert.equal(r.items.find(i=>i.operator==='PLUS').amount,33.21,'Kuala Lumpur to Johor Bahru matches the published fare');
 {const penang=[...through(['JALAN DUTA','JURU'],plus),...through(['JAMBATAN PULAU PINANG'],hw('5'))].filter(Boolean);const x=mergeRateTolls(none,{legs:[{points:penang}],sections:[{sectionType:'TOLL',startPointIndex:0,endPointIndex:penang.length-1}]},real);assert.equal(x.amount,41.24,'PLUS 35.50 plus the Penang Bridge 5.74');assert.deepEqual(x.items.map(i=>i.operator),['PLUS','JPP'])}
 
+// ---- A basic (OSRM) route has no toll sections, so its own geometry is the candidate stretch ----
+const geo={legs:[{points:pts}]};
+r=mergeRateTolls(none,geo,real,true);assert.equal(r.status,'estimate','the plazas along a basic route price it');assert.equal(r.amount,33.21);assert.equal(r.items[0].label,'SUNGAI BESI → SKUDAI');
+const nowhere={legs:[{points:[{longitude:103.30,latitude:2.30},{longitude:103.35,latitude:2.35}]}]};
+r=mergeRateTolls(none,nowhere,real,true);assert.equal(r.status,'none','no plaza on the route means no toll');assert.equal(r.amount,0);assert.match(r.note,/No toll plaza sits on this route/);
+r=mergeRateTolls(none,geo,real);assert.equal(r.status,'none','without the flag the TomTom sections still decide');
 // ---- Through the whole Worker, as the app asks for it ----
 const built=await readFile('dist/server/index.js','utf8'),worker=(await import('data:text/javascript;base64,'+Buffer.from(built).toString('base64'))).default;
 function tomtom(points,sections){let length=0;for(let i=1;i<points.length;i++)length+=Math.hypot((points[i].longitude-points[i-1].longitude)*111195*Math.cos(points[0].latitude*Math.PI/180),(points[i].latitude-points[i-1].latitude)*111195);length=Math.round(length);const ins=(i,m,off,t)=>({pointIndex:i,point:points[i],maneuver:m,routeOffsetInMeters:off,travelTimeInSeconds:t,street:'Highway'});
@@ -78,4 +84,10 @@ let out=await ask(tomtom(pts,[{sectionType:'TOLL',startPointIndex:0,endPointInde
 out=await ask(tomtom(pts,[]));assert.equal(out.tollEstimate.status,'none');assert.equal(out.tollEstimate.amount,0);
 out=await ask(tomtom(pts.slice(0,Math.round(pts.length/3)),[{sectionType:'TOLL',startPointIndex:0,endPointIndex:Math.round(pts.length/3)-1}]));assert.ok(['partial','unavailable'].includes(out.tollEstimate.status),'half a trip with one plaza is never shown as a full estimate: '+out.tollEstimate.status);
 assert.ok(!JSON.stringify(out).includes('test-secret'));
+// The app asks for the price of a basic route through this endpoint.
+{const res=await worker.fetch(new Request('https://test/api/toll/route',{method:'POST',headers:{'cf-connecting-ip':'198.51.100.201'},body:JSON.stringify({points:pts.map(p=>[p.longitude,p.latitude])})}),{});
+ assert.equal(res.status,200);const t=await res.json();assert.equal(t.tollEstimate.status,'estimate');assert.equal(t.tollEstimate.amount,33.21);
+ const bad=await worker.fetch(new Request('https://test/api/toll/route',{method:'POST',headers:{'cf-connecting-ip':'198.51.100.202'},body:JSON.stringify({points:[[1,2]]})}),{});
+ assert.equal(bad.status,400,'points outside Malaysia are refused')}
+
 console.log('PASS: rate data integrity and cross-checks, closed and open pricing, tolerance, completeness, no double charging, bad input, real fares on real plaza positions, and the full Worker path');
