@@ -26,7 +26,10 @@ async function request(from,to,alternatives,signal){
  if(!r.ok||d.code!=='Ok'||!d.routes?.length)throw Object.assign(new Error('Basic routing is also unavailable. Please retry.'),{retryAfterMs:error.retryAfterMs});
  d.routes=d.routes.filter(route=>Array.isArray(route.geometry?.coordinates)&&route.geometry.coordinates.length>=2&&!root.LapanRoadRestrictions.blocked(route.geometry.coordinates));
  if(!d.routes.length)throw Error('No basic route avoiding the reported restriction is available.');
- d.routes.forEach(route=>{route.provider='OSRM';route.closureCheckedAt=null;route.trafficCheckedAt=null});return d;
+ d.routes.forEach(route=>{route.provider='OSRM';route.closureCheckedAt=null;route.trafficCheckedAt=null});
+ // A basic route has no toll sections, so price it from the plazas along its geometry.
+ await Promise.all(d.routes.map(async route=>{try{const res=await fetch('/api/toll/route',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({points:route.geometry.coordinates})});if(res.ok){const t=await res.json();if(t?.tollEstimate)route.tollEstimate=t.tollEstimate}}catch{}}));
+ return d;
 }
 function label(route){return route?.provider==='TomTom'?'TomTom live route · closures checked at '+new Date(route.closureCheckedAt).toLocaleTimeString('en-MY',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'})+' · reported closures only':'OSRM basic route · no live traffic · road closures NOT checked'}
 root.LapanRouting={request,label};if(typeof module==='object')module.exports={request,label};
