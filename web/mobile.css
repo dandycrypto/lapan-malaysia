@@ -177,3 +177,16 @@ body.guiding .lang-switch{display:none}
 body.guiding:not(.drive-more) #navLang{display:none!important}
 #driveControls #navLang{order:-2}
 
+/* Installed app: behave like a native screen, not a page inside a browser. */
+html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
+input,textarea,select,[contenteditable]{user-select:text;-webkit-user-select:text}
+@media (display-mode:standalone){
+ html{background:#114b3e}
+ body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+ #openInstall,.install-only{display:none!important}
+}
+#updateBanner{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:1200;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#19382f;color:#fff;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+#updateBanner.hidden{display:none}
+#updateBanner span{flex:1}
+#updateBanner button{border:0;border-radius:10px;padding:8px 14px;font-weight:600;background:#daf67a;color:#19382f}
