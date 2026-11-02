@@ -364,5 +364,11 @@ window.LapanI18n.add({
 "Traffic light location · live colour unavailable":"Lokasi lampu isyarat · warna masa nyata tidak tersedia",
 "Mapped traffic light; live colour unavailable":"Lampu isyarat dipetakan; warna masa nyata tidak tersedia",
 "Voice unavailable or interrupted · tap to retry, or choose a voice in Voice & sound":"Suara tidak tersedia atau terganggu · ketik untuk cuba lagi, atau pilih suara dalam Suara & bunyi",
-"Hello":"Helo"
+"Hello":"Helo",
+ "Your icon":"Ikon anda",
+ "Arrow":"Anak panah",
+ "Car":"Kereta",
+ "Motorcycle":"Motosikal",
+ "Lorry":"Lori",
+ "Van":"Van",
 });

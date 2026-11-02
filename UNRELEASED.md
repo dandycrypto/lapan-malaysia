@@ -1,6 +1,7 @@
 # Unreleased changes
 
 Pending routine changes (not yet curated into a public release):
+- Your own marker: pick arrow, car, motorcycle, van or lorry in More options. The choice is kept on the phone and used on both the flat map and the 3D driving screen.
 
 - Security headers on every response: Content-Security-Policy, HSTS, frame denial, referrer and permissions policies.
 - Subresource Integrity on the Leaflet files loaded from unpkg; fonts now load through preconnected link tags instead of a CSS import.
